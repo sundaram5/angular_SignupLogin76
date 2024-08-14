@@ -1,0 +1,74 @@
+<!-- Template driven form -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Slide Navbar</title>
+    <link rel="stylesheet" type="text/css" href="reactive-form.component.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="main">
+        <input type="checkbox" id="chk" aria-hidden="true">
+
+        <div class="signup">
+            <form [formGroup]="signUpForm" >
+                <label for="chk" aria-hidden="true">Sign up</label>
+                <input type="text" name="uname" placeholder="User name" formControlName="uname"
+                  >
+                 <!-- Showing Multiple Validation error -->
+                <p *ngIf="signUpForm.controls['uname'].touched && !signUpForm.controls['uname'].valid">
+                    <span *ngIf="signUpForm.controls['uname'].hasError('minlength')">Name should be at least 5
+                        character</span>
+                    <span *ngIf="signUpForm.controls['uname'].hasError('required')">Name is required</span>
+                    <span *ngIf="signUpForm.controls['uname'].hasError('maxlength')">Name should be less than 15
+                        character </span>
+
+                </p>
+
+                <input type="email" name="email" placeholder="Email" formControlName="email"
+                   >
+
+                <p *ngIf="signUpForm.controls['email'].touched && !signUpForm.controls['email'].valid">
+                    <span *ngIf="signUpForm.controls['email'].hasError('required')">Email is Required</span>
+                    <span *ngIf="signUpForm.controls['email'].hasError('email')">Email should be a correct email</span>
+                </p>
+
+                <input type="password" name="password" placeholder=" Password " formControlName="password"
+                  >
+                
+                <p *ngIf="signUpForm.controls['password'].touched && !signUpForm.controls['password'].valid">
+                    <span *ngIf="signUpForm.controls['password'].hasError('required')">Password required</span>
+                    <span *ngIf="signUpForm.controls['password'].hasError('minlength')">Password should be at least 3
+                        character</span>
+                </p>
+
+                <button (click)="onSignUp(signUpForm)"> Sign up</button>
+                <button type="reset">Cancel</button>
+                <!-- <button (click)="resetData()">Cancel2</button> -->
+                <!-- <button (click)="resetData()">Cancel3</button> -->
+                <!-- <button (click)="fillData()">FillData</button> -->
+            </form>
+        </div>
+
+        <div class="login">
+            <form>
+                <label for="chk" aria-hidden="true">Login</label>
+                <input type="text" name="uname" placeholder="User name">
+                
+                <input type="password" name="password" placeholder="Password">
+                <p *ngIf="signUpForm.controls['password'].touched && !signUpForm.controls['password'].valid">
+                    <span *ngIf="signUpForm.controls['password'].hasError('required')">Password required</span>
+                    <span *ngIf="signUpForm.controls['password'].hasError('minlength')">Password should be at least 3
+                        character</span>
+                </p>
+
+                <button (click)="onLogin()">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
